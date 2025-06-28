@@ -4,7 +4,6 @@ from io import BytesIO
 import pandas as pd
 from PIL import Image
 import pytesseract
-import imghdr
 import numpy as np
 import pdfplumber
 import docx
@@ -19,8 +18,8 @@ async def parse_file(file: UploadFile = File(...)):
     mime_type, _ = mimetypes.guess_type(filename)
 
     try:
-        # 1. Handle Image (OCR)
-        if imghdr.what(None, h=contents):
+        # 1. Handle Image (OCR) — based on MIME type
+        if mime_type and mime_type.startswith("image"):
             img = Image.open(BytesIO(contents))
             text = pytesseract.image_to_string(img)
             return {
