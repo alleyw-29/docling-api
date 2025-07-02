@@ -12,6 +12,7 @@ import subprocess
 
 app = FastAPI()
 
+
 @app.get("/check-tesseract")
 def check_tesseract():
     try:
@@ -19,6 +20,7 @@ def check_tesseract():
         return {"status": "installed", "version": output.decode()}
     except Exception as e:
         return {"status": "not installed", "error": str(e)}
+
 
 @app.post("/docling")
 async def parse_file(file: UploadFile = File(...)):
@@ -106,6 +108,7 @@ async def parse_file(file: UploadFile = File(...)):
             "error": "Parsing failed",
             "details": str(e)
         })
+
 
 @app.get("/")
 def root():
