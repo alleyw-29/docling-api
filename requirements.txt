@@ -4,6 +4,6 @@ pytesseract
 pdfplumber
 python-multipart
 numpy
-pillow
+Pillow
 python-docx
 pandas
