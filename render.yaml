@@ -2,5 +2,5 @@ services:
   - type: web
     name: docling-api
     env: docker
-    autoDeploy: true
     dockerfilePath: ./Dockerfile
+    autoDeploy: true
