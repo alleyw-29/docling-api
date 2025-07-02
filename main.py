@@ -8,8 +8,17 @@ import numpy as np
 import pdfplumber
 import docx
 import mimetypes
+import subprocess
 
 app = FastAPI()
+
+@app.get("/check-tesseract")
+def check_tesseract():
+    try:
+        output = subprocess.check_output(["tesseract", "--version"])
+        return {"status": "installed", "version": output.decode()}
+    except Exception as e:
+        return {"status": "not installed", "error": str(e)}
 
 @app.post("/docling")
 async def parse_file(file: UploadFile = File(...)):
